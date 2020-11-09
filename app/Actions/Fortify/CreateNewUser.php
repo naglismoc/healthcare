@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use App\Models\Hospital;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -40,8 +41,16 @@ class CreateNewUser implements CreatesNewUsers
             'permission_lvl' => 10,
             'password' => Hash::make($input['password']),
         ]);
-     //  foreach($input['hospital'] as $h){
-        var_dump($input['hospital']);
-     //  }die;
+         $hospitals = explode("|,",$input['hospital']);
+         
+        foreach($hospitals as $h){
+            $h=str_replace("|","",$h);
+            Hospital::create([
+            'name' => $h,
+            'user_id' => $user->id
+        ]);
+       
+      }
+      return $user;
     }
 }

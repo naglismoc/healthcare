@@ -1,7 +1,7 @@
 
 
-<x-jet-label for="hospital" value="{{ __('Hospital') }}" />
-<select name="hospital" id="hospital" size="<?=count($hospitals)?>" multiple>
+<x-jet-label for="hospitalsSelect" value="{{ __('Hospital') }}" />
+<select name="hospitalsSelect" id="hospitals" size="<?=count($hospitals)?>" onchange="getHospitals()" multiple>
    
   
     @foreach ($hospitals as $hospital)

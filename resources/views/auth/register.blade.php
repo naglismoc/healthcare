@@ -13,9 +13,10 @@
             <div id="hos1">
            
             </div>
-
+            <input type="hidden" name="hospital" id="hos2">
             <script>
                     $("#hos1").load('{{route("hospitals")}}' );
+                   
             </script>
             <div>
                 <x-jet-label for="name" value="{{ __('Name') }}" />
@@ -68,3 +69,9 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+<script>
+ function getHospitals(){
+        hospitals=Array.from( document.getElementById('hospitals').selectedOptions).map(option => option.value+"|");
+        document.getElementById("hos2").value=hospitals;
+        }
+</script>

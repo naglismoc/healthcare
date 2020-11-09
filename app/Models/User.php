@@ -31,7 +31,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'email',
-        'Hospital',
+        'Hospital[]',
         'password'
     ];
 
