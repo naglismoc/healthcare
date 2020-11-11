@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'surname',
         'ak',
+        'status',
         'permission_lvl',
         'phone',
         'address',

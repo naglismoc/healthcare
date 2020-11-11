@@ -38,9 +38,11 @@ class CreateNewUser implements CreatesNewUsers
             'address' => $input['address'],
             'ak' => $input['ak'],
             'phone' => $input['phone'],
+            'status' => 0,
             'permission_lvl' => 10,
             'password' => Hash::make($input['password']),
         ]);
+        
          $hospitals = explode("|,",$input['hospital']);
          
         foreach($hospitals as $h){

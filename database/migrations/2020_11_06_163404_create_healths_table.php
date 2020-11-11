@@ -15,7 +15,7 @@ class CreateHealthsTable extends Migration
     {
         Schema::create('healths', function (Blueprint $table) {
             $table->id();
-            $table->integer('temperature');
+            $table->decimal('temperature');
             $table->integer('taste');
             $table->integer('smell');
             $table->integer('energetic');

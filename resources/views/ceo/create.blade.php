@@ -1,8 +1,15 @@
 <x-guest-layout>
     <x-jet-authentication-card>
+        <style>
+            h1{
+                font-size: 70px;
+            }
+        </style>
+        
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <h1>Ligonines vadovo registracija</h1>
         </x-slot>
+
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -54,12 +61,9 @@
             </div>
           
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
+            
                 <x-jet-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('Uzregistruoti vadova') }}
                 </x-jet-button>
             </div>
         </form>

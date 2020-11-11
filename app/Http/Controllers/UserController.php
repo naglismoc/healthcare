@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Models\User;
 use App\Models\Hospital;
-
+use Auth;
 class UserController extends Controller
 {
     /**
@@ -20,14 +20,34 @@ class UserController extends Controller
     {
         return view("home");
     }
+    public function doctorIndex()
+    { $patients = User::where('permission_lvl', '>=' , '1')
+        ->where('permission_lvl', '<' , '10')->get();
+        return view("doctor.index", ['patients' => $patients]);
+    }
     public function hospitals()
     {
-        $hospitals = $users = Hospital::select('name')
+        $hospitals = Hospital::select('name')
         ->groupBy('name')
         ->get();
         return view("hospitals",['hospitals'=>$hospitals]);
     }
 
+    public function inactivedoctors(){
+        if(!(Auth::user()->permission_lvl >= 100)){return redirect()->route('home');}//tikriname ar daktaras verifikuotas
+        $unverifiedDoctors = User::where('status', '=' , '0')
+        ->where('permission_lvl', '>=' , '10')
+        ->where('permission_lvl', '<' , '100')->get();
+       
+        return view("ceo.verifydoctor",['unverifiedDoctors'=>$unverifiedDoctors]);
+    }
+    public function verifydoctor(Request $request){
+        $user = User::find($request->id);
+        $user->status=1;
+        $user->update();
+        return back();
+    }
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +55,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->status){return redirect()->route('home');}//tikriname ar daktaras verifikuotas
         return view("patient.create");
+        
 
     }
     public function createCEO()
@@ -50,7 +72,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePatient(Request $request)
     {
          User::create([
             'name' => $request['name'],
@@ -58,11 +80,15 @@ class UserController extends Controller
             'address' => $request['address'],
             'ak' => $request['ak'],
             'phone' => $request['phone'],
+            'status' => 1,
             'permission_lvl' => 1,
             'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'password' => Hash::make(UserController::generateRandomString())
         ]);
-        return redirect()->route('patient.index');
+
+        //=======siunciame maila pacientui su prisijungimais========
+        
+        return redirect()->route('doctor.index');
     }
     public function storeCEO(Request $request)
     {   
@@ -72,6 +98,7 @@ class UserController extends Controller
             'address' => $request['address'],
             'ak' => $request['ak'],
             'phone' => $request['phone'],
+            'status' => 1,
             'permission_lvl' => 100,
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
@@ -126,5 +153,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+   public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

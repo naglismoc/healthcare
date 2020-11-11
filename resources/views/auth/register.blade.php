@@ -1,9 +1,16 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<x-guest-layout>
+
+    <x-guest-layout>
     <x-jet-authentication-card>
+        <style>
+            h1{
+                font-size: 100px;
+            }
+        </style>
+        
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <h1>Gydytojo registracija</h1>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -59,11 +66,11 @@
           
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{ __('Jau uzsiregistravote?') }}
                 </a>
 
                 <x-jet-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('Gydytojo uzregistravimas') }}
                 </x-jet-button>
             </div>
         </form>
