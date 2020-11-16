@@ -102,7 +102,7 @@ tr:nth-child(even) {
                             <td>{{$patient->address}}</td>
                             <td></td>
                             <td></td>
-                            <td><a href="{{ route('patient.index',$patient) }}">paciento info</a></td>
+                            <td><a href="">paciento info</a></td>
                             </tr>
                         @endforeach
                     </table>

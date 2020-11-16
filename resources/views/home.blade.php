@@ -34,6 +34,10 @@ h1{
 body {
     font-family: 'Nunito';
 }
+a {
+    color: blue;
+    text-decoration: underline;
+}
 </style>
     </head>
     <body class="antialiased" >
@@ -58,8 +62,19 @@ body {
              
                   
               @auth  
-                @if (auth()->user()->permission_lvl>=10)
-                Sveikas sveikatos darbuotojau
+                @if (auth()->user()->status!=0 )
+                    @if (auth()->user()->permission_lvl>=10 )
+                        <a href="{{ route('medic.index') }}">Pacientu sarasas |</a>
+                    @endif
+                    @if (auth()->user()->permission_lvl>=100 )
+                        <a href="{{ route('ceo.index') }}">Mediku sarasas |</a>
+                    @endif  
+                    @if (auth()->user()->permission_lvl>=1000 )
+                        <a href="{{ route('admin.index') }}">Vadovu sarasas |</a>
+                    @endif  
+                    @if (auth()->user()->permission_lvl>=1 )
+                    <a href="{{ route('health.index',auth()->user()->id) }}">Sveikatos info |</a>
+                @endif  
                 @else
                 Sveikas paciente
                 @endif

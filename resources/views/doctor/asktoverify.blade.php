@@ -1,0 +1,1 @@
+susisiekite su ligonines administracija, kad jus patvirtintu

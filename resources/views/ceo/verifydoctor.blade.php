@@ -28,7 +28,7 @@
     <tr>
         <td> {{$doc->name}}</td>
         <td> {{$doc->surname}}</td>
-        <td> <form action="{{ route('doctor.verifydoctor') }}" method="post">
+        <td> <form action="{{ route('medic.verify') }}" method="post">
         <input type="hidden" name="id" value="{{$doc->id}}">
         @csrf
         <button type="submit">Aktyvinti</button>

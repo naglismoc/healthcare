@@ -67,4 +67,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function Healths()
+    {
+        return $this->hasMany('App\Health', 'id', 'user_id');
+    }
 }

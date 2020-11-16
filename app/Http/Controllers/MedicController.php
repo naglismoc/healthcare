@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Health;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -10,17 +10,27 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Models\User;
 use App\Models\Hospital;
 use Auth;
-class HealthController extends Controller
+
+class MedicController extends Controller
 {
+
+    public function verify(Request $request){
+        $user = User::find($request->id);
+        $user->status=1;
+        $user->update();
+        return back();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
-    {
-        $healths = Health::where('user_id','=',$id)->get();
-       return view('health.index',['patient'=> User::find($id),'healths'=>$healths]);
+    public function index()
+    { if(!(Auth::user()->status)){return redirect()->route('asktoverify');}//tikriname ar daktaras verifikuotas
+      
+        $patients = User::where('permission_lvl', '>=' , '1')
+        ->where('permission_lvl', '<' , '10')->get();
+        return view("doctor.index", ['patients' => $patients]);
     }
 
     /**
@@ -28,10 +38,10 @@ class HealthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
-    {
-       return view('health.create',['patient_id'=>$id]);
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -41,29 +51,16 @@ class HealthController extends Controller
      */
     public function store(Request $request)
     {
-        $health = new Health();
-        $health->user_id = $request->patient_id;
-        $health->temperature = $request->temperature;
-        $health->taste = $request->taste;
-        $health->smell = $request->smell;
-        $health->energetic = $request->energy;
-        $health->nose = $request->nose;
-        $health->throught = $request->throught;
-        $health->cough = $request->cough;
-        $health->respiration = $request->respiration;
-        $health->pain = $request->pain;
-        $health->save();
-        // dd($request->patient_id);
-        return redirect()->back();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Health  $health
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Health $health)
+    public function show($id)
     {
         //
     }
@@ -71,10 +68,10 @@ class HealthController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Health  $health
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Health $health)
+    public function edit($id)
     {
         //
     }
@@ -83,10 +80,10 @@ class HealthController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Health  $health
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Health $health)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -94,10 +91,10 @@ class HealthController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Health  $health
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Health $health)
+    public function destroy($id)
     {
         //
     }
