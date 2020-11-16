@@ -54,7 +54,8 @@ class HealthController extends Controller
         $health->pain = $request->pain;
         $health->save();
         // dd($request->patient_id);
-        return redirect()->back();
+        // return redirect()->back();
+        return redirect()->route('health.index',$request->patient_id);
     }
 
     /**

@@ -4,12 +4,18 @@
             h1{
                 font-size: 100px;
             }
+            a{
+                color:blue;
+                text-decoration: underline;
+            }
         </style>
         
         <x-slot name="logo">
             <h1>Paciento registracija</h1>
         </x-slot>
 
+        <a href="{{ route('home') }}">I pradzia </a>
+       
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('patient.store') }}">

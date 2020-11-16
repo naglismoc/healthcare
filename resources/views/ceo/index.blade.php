@@ -80,7 +80,8 @@ tr:nth-child(even) {
                                 <div class="ml-4 text-lg leading-7 font-semibold">
                                     Mediku sarasas</a></div>
                             </div>
-                            <a href="{{ route('patient.create') }}">Sukurti pacientą</a>
+                            <a href="{{ route('ceo.inactivedoctors') }}">aktyvinti medikus |</a>
+                            <a href="{{ route('home') }}">Atgal </a>
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                   

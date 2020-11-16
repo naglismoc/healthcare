@@ -17,6 +17,7 @@
     </style>
 
 
+<a href="{{ route('ceo.index') }}">Atgal </a>
 
 <table>
     <tr>

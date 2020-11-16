@@ -100,9 +100,9 @@ tr:nth-child(even) {
                             <td>{{$patient->name}}</td>
                             <td>{{$patient->surname}}</td>
                             <td>{{$patient->address}}</td>
-                            <td></td>
-                            <td></td>
-                            <td><a href="{{ route('patient.index',$patient) }}">paciento info</a></td>
+                                {{$patient->overalHealth()}}
+                            <td>{{$patient->improvement()}}</td>
+                            <td><a href="{{ route('health.index',$patient) }}">paciento info</a></td>
                             </tr>
                         @endforeach
                     </table>
@@ -142,3 +142,6 @@ tr:nth-child(even) {
         </div>
     </body>
 </html>
+<?php
+
+?>

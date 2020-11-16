@@ -19,9 +19,9 @@ class UserController extends Controller
    
     public function index()
     {
-        $medics = User::where('permission_lvl', '>=', '100')
+        $ceos = User::where('permission_lvl', '>=', '100')
         ->where('permission_lvl', '<', '1000')->get();
-        return view("ceo.index", ['medics' => $medics]);
+        return view("admin.index", ['ceos' => $ceos]);
     }
 
     public function hospitals()

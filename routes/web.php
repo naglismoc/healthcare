@@ -108,10 +108,10 @@ Route::group(['prefix'=>'health'],function(){
     get('/create/{User}',[HealthController::class,'create'])->name('health.create');//
 
     Route::middleware(['auth:sanctum', 'verified'])->
-    post('/store{User}',[HealthController::class,'store'])->name('health.store');//
+    post('/store/{User}',[HealthController::class,'store'])->name('health.store');//
 
     Route::middleware(['auth:sanctum', 'verified'])->
-    get('/edit/{health}',[HealthController::class,'edit'])->name('health.edit');//kursime veliau
+    post('/edit/{health}',[HealthController::class,'edit'])->name('health.edit');//kursime veliau
 
     Route::middleware(['auth:sanctum', 'verified'])->
     post('/update/{health}',[HealthController::class,'update'])->name('health.update');//kursime veliau

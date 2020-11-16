@@ -53,21 +53,22 @@ background-color: #dddddd;
         </tr>
         @foreach($healths as $health)
             <tr>
-            <td>{​​{​​$health->temperature}</td>
-            <td>{​​{​​$health->taste}</td>
-            <td>{​​{​​$health->smell}</td>
-            <td>{​​{​​$health->energetic}</td>
-            <td>{​​{​​$health->nose}</td>
-            <td>{​​{​​$health->throught}</td>
-            <td>{​​{​​$health->cough}</td>
-            <td>{​​{​​$health->respiration}</td>
-            <td>{​​{​​$health->pain}</td>
+            <td>{{$health->temperature}}</td>
+            <td>{{$health->taste}}</td>
+            <td>{{$health->smell}}</td>
+            <td>{{$health->energetic}}</td>
+            <td>{{$health->nose}}</td>
+            <td>{{$health->throught}}</td>
+            <td>{{$health->cough}}</td>
+            <td>{{$health->respiration}}</td>
+            <td>{{$health->pain}}</td>
+
+
             <td>
-            <form action="{​​{​​route('health.edit')}" method="post">
-                <input type="hidden" name="edit" value="{​​{​​$health->id}">
-                <input type="submit" value="EDIT">
-                @csrf
-            </form>
+                <form action = "{{route('health.edit',$health)}}" method = "post">
+                    <input type="submit" value="EDIT">
+                    @csrf
+                </form>
             </td>
             </tr>
         @endforeach

@@ -43,7 +43,7 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { $password = UserController::generateRandomString();
         User::create([
             'name' => $request['name'],
             'surname' => $request['surname'],
@@ -53,9 +53,9 @@ class PatientController extends Controller
             'status' => 1,
             'permission_lvl' => 1,
             'email' => $request['email'],
-            'password' => Hash::make(UserController::generateRandomString())
+            'password' => Hash::make($password)
         ]);
-
+// dd($password);
         //=======siunciame maila pacientui su prisijungimais========
         
         return redirect()->route('medic.index');

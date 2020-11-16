@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Models\User;
 use App\Models\Hospital;
+use App\Models\Health;
 use Auth;
 
 class MedicController extends Controller
@@ -27,9 +28,19 @@ class MedicController extends Controller
      */
     public function index()
     { if(!(Auth::user()->status)){return redirect()->route('asktoverify');}//tikriname ar daktaras verifikuotas
-      
+     
         $patients = User::where('permission_lvl', '>=' , '1')
         ->where('permission_lvl', '<' , '10')->get();
+        // foreach ($patients as $key => $patient) {
+        //     foreach ($patient->healths as $key => $health) {
+        //        echo $health->id.', ';
+        //     }
+        //     echo "<br>";
+        // //    echo $patient->healths
+        // }
+
+
+
         return view("doctor.index", ['patients' => $patients]);
     }
 
